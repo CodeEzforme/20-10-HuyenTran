@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Quản lý nhạc · Huyền Trân 20/10</title>
+</head>
+<body>
+  <main>
+    <header><span class="eyebrow">HUYỀN TRÂN · 20/10</span><a href="../">← Về thiệp</a></header>
+    <h1>Âm nhạc cho từng khoảnh khắc</h1>
+    <p class="intro">Chọn bài, nghe thử và giữ lại đoạn nhạc em thích.</p>
+    <form id="music-form">
+      <div id="sections" class="sections"></div>
+      <section class="publish-card">
+        <h2>Xuất bản thay đổi</h2>
+        <p>Cấu hình sẽ áp dụng cho mọi người sau khi website cập nhật, thường khoảng 1–2 phút.</p>
+        <label>Token GitHub <input id="token" type="password" autocomplete="off" placeholder="Nhập token để xuất bản" required /></label>
+        <p class="hint">Dùng token của tài khoản có quyền ghi vào CodeEzforme/20-10-HuyenTran. Chọn quyền repository <strong>Contents: Read and write</strong>. Token chỉ ở trong phiên này, không lưu vào trình duyệt hay website. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Tạo token ↗</a></p>
+        <button id="publish" type="submit">Xuất bản cấu hình</button>
+        <p id="status" role="status" aria-live="polite">Đang tải cấu hình…</p>
+        <a href="https://github.com/CodeEzforme/20-10-HuyenTran/actions" target="_blank" rel="noopener noreferrer">Xem trạng thái cập nhật ↗</a>
+      </section>
+    </form>
+  </main>
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

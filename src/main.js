@@ -1,4 +1,14 @@
 import './style.css';
+import { defaults, validateConfig, bindSegment } from './music-config.js';
+
+let musicConfig = defaults;
+try {
+  const response = await fetch(`${import.meta.env.BASE_URL}music-config.json`, { cache: 'no-store', signal: AbortSignal.timeout(5000) });
+  if (response.ok) musicConfig = validateConfig(await response.json());
+} catch {
+  // Keep the greeting usable if the configuration cannot be loaded.
+}
+
 
 const scenes = [...document.querySelectorAll('.scene')];
 const wishes = {
@@ -21,25 +31,16 @@ const audioPlayVersions = new WeakMap();
 const openingMusic = new Audio();
 const letterMusic = new Audio();
 const ENVELOPE_HOLD_TIME = 10000;
-const CONTINUATION_START_TIME = 0;
-const OPENING_VOLUME = 0.8;
-const CONTINUATION_VOLUME = 0.65;
-const LETTER_VOLUME = 0.62;
-const assetUrl = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
-const openingTrackSource = assetUrl('october-opening.wav');
-const continuationTrackSource = openingTrackSource;
-let openingPlaylistPhase = 'opening';
-
+const OPENING_VOLUME = musicConfig.opening.volume;
+const LETTER_VOLUME = musicConfig.letter.volume;
+const trackUrl = (src) => `${import.meta.env.BASE_URL}${src}`;
 openingMusic.preload = 'auto';
 letterMusic.preload = 'metadata';
-openingMusic.src = openingTrackSource;
-letterMusic.src = assetUrl('letter-confession.mp3');
-
-[openingMusic, letterMusic].forEach((track) => {
-  track.loop = false;
-  track.volume = 0;
-});
-letterMusic.loop = true;
+openingMusic.src = trackUrl(musicConfig.opening.src);
+letterMusic.src = trackUrl(musicConfig.letter.src);
+[openingMusic, letterMusic].forEach(track => { track.volume = 0; });
+bindSegment(openingMusic, musicConfig.opening);
+bindSegment(letterMusic, musicConfig.letter);
 
 function showScene(id) {
   if (currentScene === id) return;
@@ -98,33 +99,28 @@ function startMusic(track, volume, startAt = 0, fadeDuration = 1200) {
   const playVersion = (audioPlayVersions.get(track) || 0) + 1;
   audioPlayVersions.set(track, playVersion);
 
-  const beginPlayback = () => {
+  const seek = () => {
     if (audioPlayVersions.get(track) !== playVersion) return;
-    if (track.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      track.currentTime = startAt;
-    }
-    track.volume = 0;
-    const playback = track.play();
-    playback?.then(() => fadeAudio(track, volume, fadeDuration)).catch(() => {
-      document.getElementById('sound-indicator').classList.remove('sound-toggle--active');
-    });
+    const config = track === openingMusic ? musicConfig.opening : musicConfig.letter;
+    const validStart = Number.isFinite(track.duration) && startAt >= track.duration ? 0 : startAt;
+    config.start = validStart;
+    track.currentTime = validStart;
+    // Invalid bounds cannot cause a repeated seek loop if the media was replaced.
+    if (config.end !== null && config.end > track.duration) config.end = null;
   };
+  if (track.readyState >= HTMLMediaElement.HAVE_METADATA) seek();
+  else track.addEventListener('loadedmetadata', seek, { once: true });
+  track.volume = 0;
+  const playback = track.play();
+  playback?.then(() => {
+    if (audioPlayVersions.get(track) === playVersion) fadeAudio(track, volume, fadeDuration);
+  }).catch(() => document.getElementById('sound-indicator').classList.remove('sound-toggle--active'));
 
-  if (startAt > 0 && track.readyState < HTMLMediaElement.HAVE_METADATA) {
-    track.addEventListener('loadedmetadata', beginPlayback, { once: true });
-  } else {
-    beginPlayback();
-  }
 }
 
 function ensureOpeningPlaylist() {
-  const targetVolume = openingPlaylistPhase === 'opening' ? OPENING_VOLUME : CONTINUATION_VOLUME;
-  if (!openingMusic.paused) {
-    fadeAudio(openingMusic, targetVolume, 500);
-  } else {
-    const startAt = openingPlaylistPhase === 'opening' ? 0 : CONTINUATION_START_TIME;
-    startMusic(openingMusic, targetVolume, startAt);
-  }
+  if (!openingMusic.paused) fadeAudio(openingMusic, OPENING_VOLUME, 500);
+  else startMusic(openingMusic, OPENING_VOLUME, musicConfig.opening.start);
 }
 
 function switchMusic(fromTracks, toTrack) {
@@ -135,7 +131,7 @@ function switchMusic(fromTracks, toTrack) {
       fromTrack.currentTime = 0;
     });
   });
-  startMusic(toTrack, LETTER_VOLUME);
+  startMusic(toTrack, LETTER_VOLUME, musicConfig.letter.start);
 }
 
 function stopMusic(track) {
@@ -148,43 +144,11 @@ function stopMusic(track) {
   track.volume = 0;
 }
 
-function startContinuationMusic() {
-  openingPlaylistPhase = 'continuation';
-  const playVersion = (audioPlayVersions.get(openingMusic) || 0) + 1;
-  audioPlayVersions.set(openingMusic, playVersion);
-  openingMusic.src = continuationTrackSource;
-  openingMusic.preload = 'auto';
-  openingMusic.volume = 0;
-
-  const seekToContinuation = () => {
-    if (audioPlayVersions.get(openingMusic) === playVersion) {
-      openingMusic.currentTime = CONTINUATION_START_TIME;
-    }
-  };
-
-  if (openingMusic.readyState >= HTMLMediaElement.HAVE_METADATA) {
-    seekToContinuation();
-  } else {
-    openingMusic.addEventListener('loadedmetadata', seekToContinuation, { once: true });
-  }
-
-  const playback = openingMusic.play();
-  playback?.then(() => fadeAudio(openingMusic, CONTINUATION_VOLUME, 600)).catch(() => {
-    document.getElementById('sound-indicator').classList.remove('sound-toggle--active');
-  });
-}
-
 function resetOpeningPlaylist() {
-  openingPlaylistPhase = 'opening';
-  openingMusic.src = openingTrackSource;
-  openingMusic.preload = 'auto';
+  openingMusic.src = trackUrl(musicConfig.opening.src);
   openingMusic.volume = 0;
   openingMusic.load();
 }
-
-openingMusic.addEventListener('ended', () => {
-  startContinuationMusic();
-});
 
 function createAmbient() {
   const stars = document.getElementById('stars');
@@ -390,7 +354,7 @@ document.getElementById('replay-button').addEventListener('click', () => {
   stopMusic(openingMusic);
   stopMusic(letterMusic);
   resetOpeningPlaylist();
-  startMusic(openingMusic, OPENING_VOLUME);
+  startMusic(openingMusic, OPENING_VOLUME, musicConfig.opening.start);
   document.getElementById('sound-indicator').classList.add('sound-toggle--active');
   cakeScene.classList.remove('is-holding', 'cake-complete');
   cakeWrap.style.setProperty('--hold-progress', '0deg');

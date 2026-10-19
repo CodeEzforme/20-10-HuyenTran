@@ -1,0 +1,4 @@
+{
+  "opening": { "src": "assets/anh-nang-cua-anh.mp3", "start": 0, "end": null, "volume": 0.8, "loop": true },
+  "letter": { "src": "assets/letter-confession.mp3", "start": 0, "end": null, "volume": 0.62, "loop": true }
+}
