@@ -23,11 +23,11 @@ const letterMusic = new Audio();
 const ENVELOPE_HOLD_TIME = 10000;
 const CONTINUATION_START_TIME = 0;
 const OPENING_VOLUME = 0.8;
-const CONTINUATION_VOLUME = 0.2;
+const CONTINUATION_VOLUME = 0.65;
 const LETTER_VOLUME = 0.62;
 const assetUrl = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
-const openingTrackSource = assetUrl('letter-confession.mp3');
-const continuationTrackSource = assetUrl('letter-confession.mp3');
+const openingTrackSource = assetUrl('october-opening.wav');
+const continuationTrackSource = openingTrackSource;
 let openingPlaylistPhase = 'opening';
 
 openingMusic.preload = 'auto';
