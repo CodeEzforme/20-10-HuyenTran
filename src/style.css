@@ -1527,3 +1527,11 @@ button:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* A bouquet for Vietnamese Women's Day. */
+.flower-gift { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.flower-gift__halo { position: absolute; inset: 32px 12px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 139, 170, .23), transparent 70%); transition: transform 1s, opacity 1s; }
+.flower-gift__bouquet { position: relative; font-size: 148px; line-height: 1.25; filter: drop-shadow(0 16px 25px rgba(0, 0, 0, .25)); animation: gift-breathe 4s ease-in-out infinite; }
+.flower-gift__caption { position: relative; margin-top: 12px; color: var(--gold-bright); font-family: Georgia, serif; font-style: italic; font-size: 14px; }
+.cake-complete .flower-gift__halo { transform: scale(1.35); opacity: .5; }
+.cake-complete .flower-gift__bouquet { filter: drop-shadow(0 0 28px rgba(255, 177, 197, .6)); }

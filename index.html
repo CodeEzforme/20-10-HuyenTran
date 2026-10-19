@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#120508" />
-    <meta name="description" content="Một món quà sinh nhật nhỏ dành riêng cho em." />
-    <title>Birthday Love NgocMo</title>
+    <meta name="description" content="Một món quà 20/10 dành riêng cho Huyền Trân, với tất cả yêu thương từ anh." />
+    <title>Huyền Trân — Chúc mừng 20/10</title>
   </head>
   <body>
     <main id="app">
@@ -16,14 +16,14 @@
 
       <section class="scene scene--active" id="scene-welcome" aria-labelledby="welcome-title">
         <div class="welcome-card">
-          <span class="eyebrow">MỘT ĐIỀU NHỎ DÀNH CHO CẬU</span>
+          <span class="eyebrow">GỬI HUYỀN TRÂN · 20/10</span>
           <div class="gift-box" aria-hidden="true">
             <span class="gift-box__lid"></span>
             <span class="gift-box__ribbon"></span>
             <span class="gift-box__bow gift-box__bow--left"></span>
             <span class="gift-box__bow gift-box__bow--right"></span>
           </div>
-          <h1 id="welcome-title">Cậu có một món quà</h1>
+          <h1 id="welcome-title">Huyền Trân ơi,<br />em có một món quà</h1>
           <p>Đeo tai nghe và chạm vào đây nhé.</p>
           <button class="primary-button" id="start-button" type="button">
             <span>Mở điều bất ngờ</span>
@@ -32,61 +32,40 @@
         </div>
       </section>
 
-      <section class="scene" id="scene-date" aria-labelledby="birthday-title">
+      <section class="scene" id="scene-date" aria-labelledby="celebration-title">
         <div class="date-reveal">
-          <span class="eyebrow">NGÀY ĐẶC BIỆT NHẤT</span>
-          <h2 class="script-title" id="birthday-title">Happy Birthday</h2>
-          <div class="date-picker" aria-label="Ngày 18 tháng 9">
+          <span class="eyebrow">MỪNG NGÀY PHỤ NỮ VIỆT NAM</span>
+          <h2 class="script-title" id="celebration-title">Happy 20/10</h2>
+          <div class="date-picker" aria-label="Ngày 20 tháng 10">
             <div class="date-picker__arrow" aria-hidden="true">→</div>
             <div class="number-window">
               <div class="number-reel" id="number-reel"></div>
               <span class="number-glow" aria-hidden="true"></span>
             </div>
-            <div class="month-label"><span>tháng</span><strong>9</strong></div>
+            <div class="month-label"><span>tháng</span><strong>10</strong></div>
           </div>
-          <p class="date-caption">Có một người đã làm ngày này trở nên thật đẹp.</p>
+          <p class="date-caption">Ngày dành cho em — cô gái khiến thế giới của anh dịu dàng hơn.</p>
         </div>
       </section>
 
       <section class="scene" id="scene-cake" aria-labelledby="cake-title">
         <div class="cake-stage">
-          <span class="eyebrow">ƯỚC MỘT ĐIỀU NHÉ</span>
-          <h2 id="cake-title">Mong những điều tốt đẹp nhất, đều tìm đến Cậu.</h2>
+          <span class="eyebrow">MỘT BÓ HOA DÀNH RIÊNG CHO EM</span>
+          <h2 id="cake-title">Mong mọi điều dịu dàng đều tìm đến em.</h2>
 
           <div class="cake-wrap" id="cake-wrap" aria-hidden="true">
-            <div class="candle">
-              <div class="wick"></div>
-              <div class="flame-wrap">
-                <div class="hold-ring"><span></span></div>
-                <div class="flame"><i></i></div>
-                <div class="smoke"></div>
-              </div>
-              <div class="candle-stripes"></div>
-            </div>
-            <div class="cake">
-              <div class="cake__top">
-                <span class="berry berry--1"></span>
-                <span class="berry berry--2"></span>
-                <span class="berry berry--3"></span>
-                <span class="berry berry--4"></span>
-              </div>
-              <div class="cake__cream">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-              <div class="cake__body">
-                <span class="cake-line cake-line--1"></span>
-                <span class="cake-line cake-line--2"></span>
-                <span class="cake-line cake-line--3"></span>
-              </div>
-              <div class="cake__plate"></div>
+            <div class="flower-gift">
+              <span class="flower-gift__halo"></span>
+              <span class="flower-gift__bouquet">💐</span>
+              <span class="flower-gift__caption">Dành cho cô gái anh thương</span>
             </div>
           </div>
 
           <div class="cake-note">
-            <p>Có một món quà nhỏ dành cho Cậu...</p>
+            <p>Gửi một điều ước cho em, hôm nay và mọi ngày...</p>
             <button id="blow-button" class="hold-button" type="button">
               <span class="hold-button__icon" aria-hidden="true">☝</span>
-              <span><strong>Nhấn giữ để thổi nến nhé</strong><small id="hold-hint">Giữ trong 5 giây</small></span>
+              <span><strong>Nhấn giữ để gửi điều ước nhé</strong><small id="hold-hint">Giữ trong 5 giây</small></span>
             </button>
           </div>
         </div>
@@ -95,7 +74,7 @@
       <section class="scene scene--black" id="scene-words" aria-live="polite">
         <div class="words-stage">
           <span class="words-stage__count" id="words-count">01 / 03</span>
-          <p class="words-stage__line" id="words-line">Ngọn nến đã tắt.</p>
+          <p class="words-stage__line" id="words-line">Điều ước nhỏ đã được gửi đi.</p>
           <span class="words-stage__dot" aria-hidden="true"></span>
         </div>
       </section>
@@ -103,32 +82,32 @@
       <section class="scene" id="scene-wishes" aria-labelledby="wishes-title">
         <div class="wishes-stage">
           <span class="eyebrow">MỘT ĐIỀU ƯỚC</span>
-          <h2 id="wishes-title">Bây giờ... Chọn một điều ước<br />cho ngày sinh nhật của Cậu.</h2>
-          <p class="section-hint">Chạm vào chiếc vé mà Cậu thích nhất</p>
-          <div class="tickets" aria-label="Bốn điều ước sinh nhật">
+          <h2 id="wishes-title">Ngày 20/10 này, em muốn<br />nhận lời chúc nào từ anh?</h2>
+          <p class="section-hint">Chạm vào chiếc vé mà em thích nhất</p>
+          <div class="tickets" aria-label="Bốn lời chúc 20/10 dành cho em">
             <button class="ticket ticket--rose" data-wish="happy" type="button">
               <span class="ticket__number">01</span>
               <span class="ticket__icon" aria-hidden="true">✦</span>
               <strong>Hạnh phúc hơn</strong>
-              <small>BIRTHDAY WISH</small>
+              <small>FOR YOU · 20/10</small>
             </button>
             <button class="ticket ticket--cream" data-wish="healthy" type="button">
               <span class="ticket__number">02</span>
               <span class="ticket__icon" aria-hidden="true">☼</span>
               <strong>Khỏe mạnh hơn</strong>
-              <small>BIRTHDAY WISH</small>
+              <small>FOR YOU · 20/10</small>
             </button>
             <button class="ticket ticket--blue" data-wish="peaceful" type="button">
               <span class="ticket__number">03</span>
               <span class="ticket__icon" aria-hidden="true">☾</span>
               <strong>Bình yên hơn</strong>
-              <small>BIRTHDAY WISH</small>
+              <small>FOR YOU · 20/10</small>
             </button>
             <button class="ticket ticket--gold" data-wish="cute" type="button">
               <span class="ticket__number">04</span>
               <span class="ticket__icon" aria-hidden="true">♡</span>
               <strong>Dễ thương hơn</strong>
-              <small>BIRTHDAY WISH</small>
+              <small>FOR YOU · 20/10</small>
             </button>
           </div>
         </div>
@@ -136,17 +115,17 @@
 
       <section class="scene" id="scene-wish-result" aria-labelledby="wish-result-title">
         <div class="wish-result">
-          <span class="eyebrow">ĐIỀU ƯỚC CỦA CẬU</span>
+          <span class="eyebrow">LỜI CHÚC ANH GỬI EM</span>
           <div class="heart-illustration" aria-hidden="true">
             <div class="heart-illustration__orbit"><i></i><i></i><i></i></div>
             <div class="heart-illustration__shape"><span>♡</span></div>
           </div>
-          <h2 id="wish-result-title">Chúc Mừng Sinh Nhật Cậu.</h2>
+          <h2 id="wish-result-title">Chúc Huyền Trân 20/10 thật vui.</h2>
           <p class="wish-copy" id="wish-copy"></p>
           <div class="wish-nav">
             <button class="text-button" id="choose-again" type="button">← Chọn lại</button>
             <button class="letter-link" id="letter-link" type="button">
-              <span>Có một lá thư dành tặng cho Cậu</span>
+              <span>Có một lá thư dành tặng cho em</span>
               <i aria-hidden="true">→</i>
             </button>
           </div>
@@ -156,13 +135,13 @@
       <section class="scene" id="scene-envelope" aria-labelledby="envelope-title">
         <div class="envelope-stage">
           <span class="eyebrow">CHƯA HẾT ĐÂU</span>
-          <h2 id="envelope-title">Tớ đã viết điều này<br />chỉ dành riêng cho Cậu.</h2>
+          <h2 id="envelope-title">Anh đã viết điều này<br />chỉ dành riêng cho em.</h2>
           <button class="envelope-button" id="envelope-button" type="button" aria-label="Mở lá thư">
             <span class="envelope-shadow"></span>
             <span class="envelope">
               <span class="envelope__back"></span>
               <span class="envelope__letter">
-                <small>GỬI CẬU</small>
+                <small>GỬI HUYỀN TRÂN</small>
                 <strong>with love</strong>
                 <i>♡</i>
               </span>
@@ -178,7 +157,7 @@
       <section class="scene scene--black" id="scene-confession" aria-live="polite">
         <div class="matrix-rain" id="matrix-rain" aria-hidden="true"></div>
         <div class="confession-stage">
-          <span class="confession-kicker">CÓ MỘT ĐIỀU ANH MUỐN NÓI</span>
+          <span class="confession-kicker">ĐÔI ĐIỀU ANH MUỐN GỬI EM</span>
           <p class="confession-line" id="confession-line"></p>
           <div class="confession-progress" id="confession-progress" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
@@ -202,9 +181,9 @@
             </svg>
           </div>
           <div class="final-copy">
-            <span>VÀ ĐIỀU QUAN TRỌNG NHẤT...</span>
+            <span>20/10 VÀ CẢ NHỮNG NGÀY SAU...</span>
             <h2 id="final-title">Anh yêu em</h2>
-            <p>Em đồng ý làm bạn gái anh nhé?</p>
+            <p>Mong em luôn hạnh phúc và được yêu thương.</p>
           </div>
           <button class="replay-button" id="replay-button" type="button">Xem lại từ đầu ↻</button>
         </div>

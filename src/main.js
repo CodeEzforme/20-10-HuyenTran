@@ -2,10 +2,10 @@ import './style.css';
 
 const scenes = [...document.querySelectorAll('.scene')];
 const wishes = {
-  happy: 'Chúc Cậu tuổi mới <strong>hạnh phúc hơn</strong>, mỗi ngày đều có thật nhiều lý do để mỉm cười và luôn được yêu thương theo cách Cậu xứng đáng.',
-  healthy: 'Chúc Cậu <strong>khỏe mạnh hơn</strong>, ngủ đủ giấc, ăn uống đầy đủ và luôn có thật nhiều năng lượng để làm những điều Cậu thích.',
-  peaceful: 'Chúc Cậu <strong>bình yên hơn</strong>, những chuyện không vui rồi sẽ nhẹ nhàng qua đi, còn những điều tốt đẹp thì cứ từ từ tìm đến Cậu.',
-  cute: 'Chúc Cậu <strong>dễ thương hơn một chút</strong>… dù thật ra Cậu vốn đã đủ dễ thương để làm ai đó thích Cậu mất rồi. 🤭❤️',
+  happy: 'Chúc Huyền Trân ngày 20/10 <strong>ngập tràn hạnh phúc</strong>. Mong em luôn có thật nhiều lý do để mỉm cười, được làm những điều mình thích và được yêu thương theo cách em xứng đáng.',
+  healthy: 'Chúc em luôn <strong>khỏe mạnh và đầy năng lượng</strong>. Nhớ ăn đúng bữa, ngủ đủ giấc và chăm sóc bản thân nhé. Với anh, em vui và khỏe là điều quý giá nhất.',
+  peaceful: 'Chúc em có thật nhiều <strong>bình yên trong lòng</strong>. Những ngày mệt mỏi, em cứ nghỉ một chút, chẳng cần lúc nào cũng phải mạnh mẽ. Anh luôn sẵn lòng lắng nghe em.',
+  cute: 'Chúc cô gái của anh luôn <strong>rạng rỡ theo cách riêng của em</strong>, tự tin với những điều mình chọn và giữ mãi nụ cười anh thương. Cảm ơn em vì đã có mặt trong cuộc đời anh. ♡',
 };
 
 let currentScene = 'scene-welcome';
@@ -21,13 +21,13 @@ const audioPlayVersions = new WeakMap();
 const openingMusic = new Audio();
 const letterMusic = new Audio();
 const ENVELOPE_HOLD_TIME = 10000;
-const CONTINUATION_START_TIME = 2 * 60 + 11;
+const CONTINUATION_START_TIME = 0;
 const OPENING_VOLUME = 0.8;
 const CONTINUATION_VOLUME = 0.2;
 const LETTER_VOLUME = 0.62;
 const assetUrl = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
-const openingTrackSource = assetUrl('birthday-opening.mp3');
-const continuationTrackSource = assetUrl('happy-birthday-continuation.mp3');
+const openingTrackSource = assetUrl('letter-confession.mp3');
+const continuationTrackSource = assetUrl('letter-confession.mp3');
 let openingPlaylistPhase = 'opening';
 
 openingMusic.preload = 'auto';
@@ -183,7 +183,7 @@ function resetOpeningPlaylist() {
 }
 
 openingMusic.addEventListener('ended', () => {
-  if (openingPlaylistPhase === 'opening') startContinuationMusic();
+  startContinuationMusic();
 });
 
 function createAmbient() {
@@ -204,7 +204,7 @@ function createAmbient() {
 
 function createDateReel() {
   const reel = document.getElementById('number-reel');
-  const numbers = [4, 6, 8, 10, 12, 14, 16, 17, 19, 18];
+  const numbers = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
   reel.innerHTML = numbers.map((number) => `<span>${number}</span>`).join('');
 }
 
@@ -290,9 +290,9 @@ holdButton.addEventListener('lostpointercapture', cancelHold);
 holdButton.addEventListener('contextmenu', (event) => event.preventDefault());
 
 const wordLines = [
-  'Ngọn nến đã tắt.',
-  'Nhưng Cậu không đi qua năm nay một mình đâu.',
-  'Từ từ thôi nhé, Cậu. Tớ ở đây mà.',
+  'Điều ước nhỏ đã được gửi đi.',
+  'Mong em được yêu thương, hôm nay và mọi ngày.',
+  'Cứ là chính em nhé. Anh thương em như thế.',
 ];
 
 function startWords() {
@@ -340,16 +340,16 @@ envelopeButton.addEventListener('click', () => {
 });
 
 const confessions = [
-  'Anh muốn tiến xa hơn',
-  'Ở trong mối quan hệ này',
-  'Em đồng ý...',
-  'Làm bạn gái Anh nhé?',
+  'Huyền Trân à, chúc em 20/10 thật dịu dàng.',
+  'Mong em luôn tự tin, rạng rỡ và bình yên.',
+  'Cảm ơn em đã mang bao điều đẹp đẽ đến bên anh.',
+  'Hôm nay và mỗi ngày, anh luôn thương em.',
 ];
 
 function createMatrixRain() {
   const rain = document.getElementById('matrix-rain');
   rain.innerHTML = '';
-  const glyphs = 'ANHYÊUEM♡1809';
+  const glyphs = 'ANHYÊUEM♡2010';
   for (let i = 0; i < 34; i += 1) {
     const column = document.createElement('span');
     column.textContent = Array.from({ length: 18 }, () => glyphs[Math.floor(Math.random() * glyphs.length)]).join('\n');
